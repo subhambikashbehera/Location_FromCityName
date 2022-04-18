@@ -31,11 +31,15 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,"enter city name",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }else{
-                val gc=Geocoder(this,Locale.getDefault())
-                val addressList=gc.getFromLocationName(cityName,2)
-                val address=addressList[0]
-                location.text="latitude-${address.latitude}\nlongitude-${address.longitude}\nstate name-${address.adminArea}"
-                location.visibility=View.VISIBLE
+                try {
+                    val gc=Geocoder(this,Locale.getDefault())
+                    val addressList=gc.getFromLocationName(cityName,2)
+                    val address=addressList[0]
+                    location.text="latitude-${address.latitude}\nlongitude-${address.longitude}\nstate name-${address.adminArea}"
+                    location.visibility=View.VISIBLE
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
 
